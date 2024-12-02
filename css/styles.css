@@ -116,6 +116,12 @@ main {
     font-weight: bold;
 }
 
+#message {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
 /* Dashboard Page Styles */
 #dashboard-page {
     max-width: 1200px;
@@ -193,3 +199,4 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
