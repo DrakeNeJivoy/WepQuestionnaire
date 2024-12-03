@@ -1,5 +1,6 @@
 // Firebase импорт SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 // Конфигурация Firebase
@@ -15,14 +16,15 @@ const firebaseConfig = {
 
 // Инициализация Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
 // Логика для страницы логина
 document.getElementById("login-form")?.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("logemail").value;
+    const password = document.getElementById("logpassword").value;
 
     try {
         // Аутентификация через Firebase
@@ -39,8 +41,8 @@ document.getElementById("login-form")?.addEventListener("submit", async (event) 
 document.getElementById("register-form")?.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("regemail").value;
+    const password = document.getElementById("regpassword").value;
 
     try {
         // Создание нового пользователя через Firebase
