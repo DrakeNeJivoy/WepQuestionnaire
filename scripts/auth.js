@@ -1,23 +1,23 @@
-// Firebase импорт SDK
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+// Импортируем необходимые модули из firebaseConfig.js
+import { auth, database } from "./firebaseConfig.js";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { ref, set, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
-// Конфигурация Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyCbjARF2xMiaszm8ImoBE21sGIN3hBOALw",
-    authDomain: "webproject-f2b8d.firebaseapp.com",
-    projectId: "webproject-f2b8d",
-    storageBucket: "webproject-f2b8d.appspot.com",
-    messagingSenderId: "957727699660",
-    appId: "1:957727699660:web:228ef947dd133ee2dc0869",
-    measurementId: "G-HQPX1JPWRF",
-};
+let currentUser = null;
 
-// Инициализация Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app);
+// Слушаем изменения состояния аутентификации
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUser = user;
+        console.log("Logged in as:", user.email);
+    } else {
+        currentUser = null;
+        console.log("User not logged in");
+    }
+});
+
+// Экспортируем функцию для получения текущего пользователя
+export const getCurrentUser = () => currentUser;
 
 // Логика для страницы логина
 document.getElementById("login-form")?.addEventListener("submit", async (event) => {
@@ -27,10 +27,9 @@ document.getElementById("login-form")?.addEventListener("submit", async (event) 
     const password = document.getElementById("logpassword").value;
 
     try {
-        // Аутентификация через Firebase
         await signInWithEmailAndPassword(auth, email, password);
         alert("Logged in successfully!");
-        window.location.href = "./dashboard.html"; // Переход на страницу Dashboard
+        window.location.href = "./dashboard.html";
     } catch (error) {
         console.error("Login error:", error);
         alert(`Error: ${error.message}`);
@@ -45,12 +44,43 @@ document.getElementById("register-form")?.addEventListener("submit", async (even
     const password = document.getElementById("regpassword").value;
 
     try {
-        // Создание нового пользователя через Firebase
         await createUserWithEmailAndPassword(auth, email, password);
         alert("Registration successful! You can now log in.");
-        window.location.href = "./index.html"; // Переход на страницу логина
+        window.location.href = "./index.html";
     } catch (error) {
         console.error("Registration error:", error);
         alert(`Error: ${error.message}`);
     }
 });
+
+// Пример функции для записи данных в Firebase Realtime Database
+export async function saveSurveyToDatabase(surveyId, surveyData) {
+    if (currentUser) {
+        const surveyRef = ref(database, 'surveys/' + surveyId);
+        try {
+            await set(surveyRef, surveyData);
+            console.log("Survey saved successfully");
+        } catch (error) {
+            console.error("Error saving survey:", error);
+        }
+    } else {
+        console.error("No user logged in, cannot save survey");
+    }
+}
+
+// Пример функции для получения данных из Firebase Realtime Database
+export async function getSurveyFromDatabase(surveyId) {
+    const surveyRef = ref(database, 'surveys/' + surveyId);
+    try {
+        const snapshot = await get(surveyRef);
+        if (snapshot.exists()) {
+            return snapshot.val();
+        } else {
+            console.log("No data available");
+            return null;
+        }
+    } catch (error) {
+        console.error("Error fetching survey:", error);
+        return null;
+    }
+}

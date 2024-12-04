@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Создать опрос</title>
     <link rel="stylesheet" href="./css/styles.css">
+    <script type="module" src="scripts/createSurvey.js" defer></script>
 </head>
 <body>
     <header>
@@ -18,15 +19,13 @@
     </header>
     <main id="create-survey-page">
         <h1>Создать новый опрос</h1>
-        <form>
-            <label for="title">Название опроса</label>
-            <input type="text" id="title" placeholder="Введите название опроса">
+        <form id="createSurveyForm">
+            <input type="text" id="title" placeholder="Название анкеты" required />
             <div class="questions-container">
-                <label>1 Вопрос:</label>
-                <input type="text" placeholder="введите свой вопрос">
+                <input type="text" class="question" placeholder="Введите вопрос" required />
             </div>
-            <button type="button" id="add-question">Добавить Вопрос</button>
-            <button type="submit">Сохранить опрос</button>
+            <button type="button" id="addQuestion">Добавить вопрос</button>
+            <button type="button" id="submit">Создать анкету</button>
         </form>
     </main>
     <footer>Ису-23-1 &copy; 2024</footer>

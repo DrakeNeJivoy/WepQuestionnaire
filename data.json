@@ -1,0 +1,40 @@
+{
+    "tests": {
+      "testId1": {
+        "title": "Название анкеты",
+        "description": "Описание анкеты",
+        "creatorId": "userId1",
+        "questions": {
+          "questionId1": {
+            "text": "Как вы оцениваете качество обслуживания?",
+            "scale": [1, 5]
+          },
+          "questionId2": {
+            "text": "Насколько вы довольны скоростью выполнения заказа?",
+            "scale": [1, 5]
+          }
+        }
+      }
+    },
+    "users": {
+      "userId1": {
+        "name": "Имя пользователя",
+        "email": "user@example.com",
+        "createdTests": ["testId1"]
+      },
+      "userId2": {
+        "name": "Другой пользователь",
+        "email": "user2@example.com",
+        "completedTests": {
+          "testId1": {
+            "answers": {
+              "questionId1": 4,
+              "questionId2": 5
+            },
+            "submittedAt": "2024-12-02T12:00:00Z"
+          }
+        }
+      }
+    }
+  }
+  
