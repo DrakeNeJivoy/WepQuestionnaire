@@ -7,15 +7,23 @@ async function loadStatistics(userId, surveyId) {
     const statisticsContainer = document.querySelector(".statistics-container");
 
     try {
-        const responsesRef = child(ref(database), `responses/${surveyId}`);
-        const snapshot = await get(responsesRef);
+        const surveyRef = child(ref(database), `surveys/${userId}/${surveyId}`);
+        const surveySnapshot = await get(surveyRef);
 
-        if (snapshot.exists()) {
-            const responses = snapshot.val();
-            const stats = calculateStatistics(responses);
-            displayStatistics(stats, statisticsContainer);
+        if (surveySnapshot.exists()) {
+            const surveyData = surveySnapshot.val();
+            const responsesRef = child(ref(database), `surveys/${userId}/${surveyId}/responses`);
+            const responsesSnapshot = await get(responsesRef);
+
+            if (responsesSnapshot.exists()) {
+                const responses = responsesSnapshot.val();
+                const stats = calculateStatistics(responses);
+                displayStatistics(surveyData.questions, stats, statisticsContainer);
+            } else {
+                statisticsContainer.innerHTML = "<p>Ответы на этот опрос отсутствуют.</p>";
+            }
         } else {
-            statisticsContainer.innerHTML = "<p>Ответы на этот опрос отсутствуют.</p>";
+            statisticsContainer.innerHTML = "<p>Опрос не найден.</p>";
         }
     } catch (error) {
         console.error("Ошибка загрузки статистики:", error);
@@ -26,8 +34,10 @@ async function loadStatistics(userId, surveyId) {
 // Расчет процентного соотношения ответов
 function calculateStatistics(responses) {
     const stats = {};
+
+    // Обрабатываем каждый ответ
     Object.values(responses).forEach((userResponse) => {
-        Object.entries(userResponse).forEach(([questionIndex, answer]) => {
+        userResponse.answers.forEach((answer, questionIndex) => {
             stats[questionIndex] = stats[questionIndex] || {};
             stats[questionIndex][answer] = (stats[questionIndex][answer] || 0) + 1;
         });
@@ -45,11 +55,68 @@ function calculateStatistics(responses) {
 }
 
 // Отображение статистики
-function displayStatistics(stats, container) {
+function displayStatistics(questions, stats, container) {
     container.innerHTML = "";
     Object.entries(stats).forEach(([questionIndex, answers]) => {
         const questionBlock = document.createElement("div");
-        questionBlock.innerHTML = `<h4>Вопрос ${parseInt(questionIndex) + 1}</h4>`;
+        
+        // Отображаем сам вопрос
+        const questionText = document.createElement("h4");
+        questionText.textContent = `Вопрос: ${questions[questionIndex]}`;
+        questionBlock.appendChild(questionText);
+
+        // Подготовка данных для диаграммы
+        const labels = Object.keys(answers);
+        const data = Object.values(answers);
+
+        const chartCanvas = document.createElement("canvas");
+        chartCanvas.width = 400;
+        chartCanvas.height = 200;
+        questionBlock.appendChild(chartCanvas);
+
+        // Создание диаграммы с помощью Chart.js (круговая диаграмма)
+        new Chart(chartCanvas, {
+            type: 'pie', // Изменяем тип на "pie" для круговой диаграммы
+            data: {
+                labels: labels.map((label) => `Ответ ${label}`),
+                datasets: [{
+                    label: 'Процент ответов',
+                    data: data,
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)', 
+                        'rgba(255, 159, 64, 0.2)', 
+                        'rgba(153, 102, 255, 0.2)', 
+                        'rgba(255, 99, 132, 0.2)', 
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)', 
+                        'rgba(255, 159, 64, 1)', 
+                        'rgba(153, 102, 255, 1)', 
+                        'rgba(255, 99, 132, 1)', 
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return `${tooltipItem.label}: ${tooltipItem.raw}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Отображение текста с процентами
         Object.entries(answers).forEach(([answer, percentage]) => {
             const answerLine = document.createElement("p");
             answerLine.textContent = `Ответ ${answer}: ${percentage}%`;

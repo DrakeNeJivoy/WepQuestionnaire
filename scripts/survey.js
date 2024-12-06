@@ -5,7 +5,7 @@ import { getCurrentUser } from "./firebaseConfig.js";
 
 // Загрузка опроса
 async function loadSurvey(userId, surveyId) {
-    const surveyContainer = document.querySelector(".survey-container");
+    const surveyContainer = document.querySelector(".questions-container");
 
     try {
         const surveyRef = child(ref(database), `surveys/${userId}/${surveyId}`);
@@ -18,7 +18,8 @@ async function loadSurvey(userId, surveyId) {
                 questionElement.innerHTML = `
                     <p>${question}</p>
                     <div>
-                        ${[1, 2, 3, 4, 5].map((value) => `
+                        ${[1, 2, 3, 4, 5].map(
+                            (value) => `
                             <label>
                                 <input type="radio" name="question-${index}" value="${value}" />
                                 ${value}
@@ -51,14 +52,25 @@ async function submitSurvey(userId, surveyId) {
     }
 
     const responses = {};
-    document.querySelectorAll(".survey-container input:checked").forEach((input) => {
+    document.querySelectorAll(".questions-container input:checked").forEach((input) => {
         const questionIndex = input.name.split("-")[1];
         responses[questionIndex] = parseInt(input.value, 10);
     });
 
+    const responseData = {
+        answers: responses,
+        submittedAt: new Date().toISOString(),
+    };
+
     try {
-        const responsesRef = ref(database, `responses/${surveyId}/${currentUser.uid}`);
-        await update(responsesRef, responses);
+        // Сохранение ответов в `users/completedTests`
+        //const userResponsesRef = ref(database, `users/${currentUser.uid}/completedTests/${surveyId}`);
+        //await update(userResponsesRef, responseData);
+
+        // Сохранение ответов в `surveys/{userId}/{surveyId}/responses`
+        const surveyResponsesRef = ref(database, `surveys/${userId}/${surveyId}/responses/${currentUser.uid}`);
+        await update(surveyResponsesRef, responseData);
+
         alert("Ответы успешно сохранены!");
     } catch (error) {
         console.error("Ошибка при сохранении ответов:", error);

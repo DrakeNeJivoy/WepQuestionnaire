@@ -15,12 +15,10 @@ document.getElementById("addQuestion")?.addEventListener("click", () => {
 
 // Сохранение опроса
 document.getElementById("submit")?.addEventListener("click", async () => {
-    alert("Нажал на кнопку")
+    alert("Нажал на кнопку");
     const title = document.getElementById("title").value;
     const questionInputs = document.querySelectorAll(".questions-container .question");
     const questions = Array.from(questionInputs).map((input) => input.value);
-
-    
 
     const currentUser = getCurrentUser();
     if (!currentUser) {
@@ -32,6 +30,7 @@ document.getElementById("submit")?.addEventListener("click", async () => {
         title,
         questions,
         creator: currentUser.uid,
+        responses: {} // Инициализация пустого объекта для ответов
     };
 
     try {

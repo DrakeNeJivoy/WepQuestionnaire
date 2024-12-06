@@ -18,18 +18,39 @@ async function loadSurveys() {
                     surveyCard.className = "survey-card";
                     surveyCard.innerHTML = `
                         <h3>${survey.title}</h3>
-                        <button onclick="viewSurvey('${userId}', '${surveyId}')">Посмотреть опрос</button>
+                        <button class="view-survey" data-user-id="${userId}" data-survey-id="${surveyId}">
+                            Посмотреть опрос
+                        </button>
                     `;
 
                     // Добавляем кнопку для статистики только для опросов текущего пользователя
                     const currentUser = getCurrentUser();
                     if (currentUser && survey.creator === currentUser.uid) {
                         surveyCard.innerHTML += `
-                            <button onclick="viewStats('${userId}', '${surveyId}')">Статистика</button>
+                            <button class="view-stats" data-user-id="${userId}" data-survey-id="${surveyId}">
+                                Статистика
+                            </button>
                         `;
                     }
 
                     surveysContainer.appendChild(surveyCard);
+                });
+            });
+
+            // Назначаем обработчики событий
+            document.querySelectorAll(".view-survey").forEach((button) => {
+                button.addEventListener("click", (event) => {
+                    const userId = button.dataset.userId;
+                    const surveyId = button.dataset.surveyId;
+                    viewSurvey(userId, surveyId);
+                });
+            });
+
+            document.querySelectorAll(".view-stats").forEach((button) => {
+                button.addEventListener("click", (event) => {
+                    const userId = button.dataset.userId;
+                    const surveyId = button.dataset.surveyId;
+                    viewStats(userId, surveyId);
                 });
             });
         } else {
@@ -39,6 +60,15 @@ async function loadSurveys() {
         console.error("Ошибка загрузки опросов:", error);
         surveysContainer.innerHTML = "<p>Ошибка при загрузке опросов.</p>";
     }
+}
+
+// Функция для открытия страницы с опросом
+function viewSurvey(userId, surveyId) {
+    location.href = `survey.html?userId=${userId}&surveyId=${surveyId}`;
+}
+
+function viewStats(userId, surveyId) {
+    location.href = `status.html?userId=${userId}&surveyId=${surveyId}`;
 }
 
 // Инициализация
