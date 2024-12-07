@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Статистика опроса</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="css/styles" href="styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
     <h1>Статистика опроса</h1>
-    <div class="statistics-container"></div>
-
+    <div id="loading-spinner" class="spinner" style="display: none;">
+        <span class="loader"></span>
+    </div>
+    <div class="statistics-container">
+            
+    </div>
+      
     <script type="module" src="scripts/statistics.js"></script>
 </body>
 </html>

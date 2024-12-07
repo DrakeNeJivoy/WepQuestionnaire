@@ -42,10 +42,20 @@ document.getElementById("register-form")?.addEventListener("submit", async (even
 
     const email = document.getElementById("regemail").value;
     const password = document.getElementById("regpassword").value;
+    const nickname = document.getElementById("username").value;
 
     try {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        const userRef = ref(database, `users/${user.uid}`);
+        await set(userRef, {
+            email: user.email,
+            nickname: nickname,
+            registeredAt: new Date().toISOString(),
+        });
         alert("Registration successful! You can now log in.");
+
         window.location.href = "./index.html";
     } catch (error) {
         console.error("Registration error:", error);

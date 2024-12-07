@@ -298,3 +298,80 @@ footer {
     font-weight: bold;
     color: red;
 }
+
+/*Анимация загрузки*/
+.spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(255, 255, 255, 0.8); Полупрозрачный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 4px solid #888;
+    border-right: 4px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loader::after {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border-left: 4px solid #444;
+    border-bottom: 4px solid transparent;
+    animation: rotation 0.5s linear infinite reverse;
+  }
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
+
+/* Добавим стили для раскрывающихся списков */
+#completed-surveys, #pending-surveys {
+    margin-top: 20px;
+}
+
+#completed-surveys-list, #pending-surveys-list {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+#completed-surveys h2, #pending-surveys h2 {
+    cursor: pointer;
+}
+
+#completed-surveys-list, #pending-surveys-list {
+    display: none;
+}
+
+#completed-surveys.open, #pending-surveys.open {
+    display: block;
+}
+
+#completed-surveys h2::after, #pending-surveys h2::after {
+    content: ' ▼';
+}
+
+#completed-surveys.open h2::after, #pending-surveys.open h2::after {
+    content: ' ▲';
+}
+

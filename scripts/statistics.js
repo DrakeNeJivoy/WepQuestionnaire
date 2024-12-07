@@ -1,12 +1,21 @@
 // Firebase импорт SDK
 import { database } from "./firebaseConfig.js";
 import { ref, get, child } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+const spinner = document.getElementById("loading-spinner");
 
+function showSpinner() {
+spinner.style.display = "flex";
+}
+
+function hideSpinner() {
+    spinner.style.display = "none";
+}
 // Функция загрузки статистики
 async function loadStatistics(userId, surveyId) {
     const statisticsContainer = document.querySelector(".statistics-container");
 
     try {
+        showSpinner()
         const surveyRef = child(ref(database), `surveys/${userId}/${surveyId}`);
         const surveySnapshot = await get(surveyRef);
 
@@ -28,6 +37,9 @@ async function loadStatistics(userId, surveyId) {
     } catch (error) {
         console.error("Ошибка загрузки статистики:", error);
         statisticsContainer.innerHTML = "<p>Ошибка при загрузке статистики.</p>";
+    }
+    finally{
+        hideSpinner();
     }
 }
 
