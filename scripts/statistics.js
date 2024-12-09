@@ -4,18 +4,19 @@ import { ref, get, child } from "https://www.gstatic.com/firebasejs/11.0.2/fireb
 const spinner = document.getElementById("loading-spinner");
 
 function showSpinner() {
-spinner.style.display = "flex";
+    spinner.style.display = "flex";
 }
 
 function hideSpinner() {
     spinner.style.display = "none";
 }
+
 // Функция загрузки статистики
 async function loadStatistics(userId, surveyId) {
     const statisticsContainer = document.querySelector(".statistics-container");
 
     try {
-        showSpinner()
+        showSpinner();
         const surveyRef = child(ref(database), `surveys/${userId}/${surveyId}`);
         const surveySnapshot = await get(surveyRef);
 
@@ -38,7 +39,7 @@ async function loadStatistics(userId, surveyId) {
         console.error("Ошибка загрузки статистики:", error);
         statisticsContainer.innerHTML = "<p>Ошибка при загрузке статистики.</p>";
     }
-    finally{
+    finally {
         hideSpinner();
     }
 }
@@ -71,24 +72,30 @@ function displayStatistics(questions, stats, container) {
     container.innerHTML = "";
     Object.entries(stats).forEach(([questionIndex, answers]) => {
         const questionBlock = document.createElement("div");
-        
+
         // Отображаем сам вопрос
         const questionText = document.createElement("h4");
         questionText.textContent = `Вопрос: ${questions[questionIndex]}`;
         questionBlock.appendChild(questionText);
 
+        // Создание контейнера для диаграммы и текста с ответами
+        const statsRow = document.createElement("div");
+        statsRow.style.display = 'flex';  // Выстраиваем все элементы в один ряд
+        statsRow.style.alignItems = 'center'; // Выравниваем элементы по вертикали
+
         // Подготовка данных для диаграммы
         const labels = Object.keys(answers);
         const data = Object.values(answers);
 
+        // Создаем canvas для диаграммы
         const chartCanvas = document.createElement("canvas");
-        chartCanvas.width = 400;
-        chartCanvas.height = 200;
-        questionBlock.appendChild(chartCanvas);
+        chartCanvas.width = 300;  // Уменьшаем размер диаграммы
+        chartCanvas.height = 150; // Уменьшаем размер диаграммы
+        statsRow.appendChild(chartCanvas);
 
         // Создание диаграммы с помощью Chart.js (круговая диаграмма)
         new Chart(chartCanvas, {
-            type: 'pie', // Изменяем тип на "pie" для круговой диаграммы
+            type: 'pie',
             data: {
                 labels: labels.map((label) => `Ответ ${label}`),
                 datasets: [{
@@ -128,12 +135,18 @@ function displayStatistics(questions, stats, container) {
             }
         });
 
-        // Отображение текста с процентами
+        // Создаем блок для ответов
+        const answersBlock = document.createElement("div");
+        answersBlock.style.marginLeft = '20px';  // Отступ между диаграммой и текстом с ответами
         Object.entries(answers).forEach(([answer, percentage]) => {
             const answerLine = document.createElement("p");
             answerLine.textContent = `Ответ ${answer}: ${percentage}%`;
-            questionBlock.appendChild(answerLine);
+            answersBlock.appendChild(answerLine);
         });
+
+        // Добавляем блок с ответами и диаграмму в родительский элемент
+        statsRow.appendChild(answersBlock);
+        questionBlock.appendChild(statsRow);
         container.appendChild(questionBlock);
     });
 }
