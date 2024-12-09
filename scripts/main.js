@@ -1,6 +1,7 @@
 import { database } from "./firebaseConfig.js";
 import { ref, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 import { getCurrentUser } from "./auth.js";
+
 const spinner = document.getElementById("loading-spinner");
 
 function showSpinner() {
