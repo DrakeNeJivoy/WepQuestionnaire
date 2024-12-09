@@ -322,7 +322,7 @@ a:hover {
 
 
 /* Добавим стили для раскрывающихся списков */
-#completed-surveys, #pending-surveys {
+/* #completed-surveys, #pending-surveys {
     margin-top: 20px;
 }
 
@@ -351,3 +351,10 @@ a:hover {
     content: ' ▲';
 }
 
+.section-header.open h2::after {
+    content: " ▲";
+}
+
+.section-header h2::after {
+    content: " ▼";
+} */
