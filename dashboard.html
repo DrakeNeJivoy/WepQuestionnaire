@@ -12,15 +12,21 @@
         <nav>
             <div class="logo">Анкетирование</div>
             <ul class="nav-links">
+                <li><a href="./profile.html" id="profile-link">Профиль</a></li> <!-- Добавлена ссылка на профиль -->
                 <li><a href="./create-survey.html">Создать опрос</a></li>
                 <li><a href="./index.html">Выйти</a></li>
+                
             </ul>
         </nav>
     </header>
     <main id="dashboard-page">
         <h1>Добро пожаловать на панель опроса</h1>
         <h1>Список анкет</h1>
-        <div class="survey-list"></div>
+        <div class="survey-list">
+            <div id="loading-spinner" class="spinner" style="display: none;">
+                <div class="loader"></div>
+            </div> 
+        </div>
         </div>
     </main>
     <footer>Ису-23-1 &copy; 2024</footer>

@@ -2,9 +2,19 @@
 import { database } from "./firebaseConfig.js";
 import { ref, get, child, update } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 import { getCurrentUser } from "./firebaseConfig.js";
+    const spinner = document.getElementById("loading-spinner");
 
+    function showSpinner() {
+    spinner.style.display = "flex";
+    }
+
+    function hideSpinner() {
+        spinner.style.display = "none";
+    }
 // Загрузка опроса
 async function loadSurvey(userId, surveyId) {
+    showSpinner();
+
     const surveyContainer = document.querySelector(".questions-container");
 
     try {
@@ -32,7 +42,19 @@ async function loadSurvey(userId, surveyId) {
 
             const submitButton = document.createElement("button");
             submitButton.textContent = "Отправить";
-            submitButton.addEventListener("click", () => submitSurvey(userId, surveyId));
+            submitButton.addEventListener("click", async (event) => {
+                event.preventDefault(); // Останавливает отправку формы по умолчанию
+                console.log("Submitting survey...");
+                try {
+                    await submitSurvey(userId, surveyId);
+                    alert("Ответы успешно сохранены!");
+                    window.location.href = "./dashboard.html";
+                    console.log("Survey submitted successfully");
+                } catch (error) {
+                    console.error("Ошибка при сохранении ответов:", error);
+                    alert("Не удалось сохранить ответы.");
+                }
+            });           
             surveyContainer.appendChild(submitButton);
         } else {
             surveyContainer.innerHTML = "<p>Опрос не найден.</p>";
@@ -41,6 +63,9 @@ async function loadSurvey(userId, surveyId) {
         console.error("Ошибка загрузки опроса:", error);
         surveyContainer.innerHTML = "<p>Ошибка загрузки опроса.</p>";
     }
+    finally {
+        hideSpinner(); // Скрываем спиннер после загрузки
+}
 }
 
 // Сохранение ответов
