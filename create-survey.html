@@ -22,9 +22,14 @@
         <form id="createSurveyForm">
             <input type="text" id="title" placeholder="Название анкеты" required />
             <div class="questions-container">
-                <input type="text" class="question" placeholder="Введите вопрос" required />
+                <div class="question-wrapper">
+                    <input type="text" class="question" placeholder="Введите вопрос">
+                </div>
             </div>
-            <button type="button" id="addQuestion">Добавить вопрос</button>
+            <div class="buttons-container">
+                <button id="addQuestion">Добавить вопрос</button>
+                <button id="clearQuestions">Очистить вопросы</button>
+            </div>
             <button type="button" id="submit">Создать анкету</button>
         </form>
     </main>

@@ -6,11 +6,53 @@ import { getCurrentUser } from "./auth.js";
 // Добавление новой строки для вопроса
 document.getElementById("addQuestion")?.addEventListener("click", () => {
     const questionsContainer = document.querySelector(".questions-container");
+
+    // Создание обертки для нового вопроса
+    const questionWrapper = document.createElement("div");
+    questionWrapper.className = "question-wrapper";
+
+    // Создание поля ввода для нового вопроса
     const newQuestion = document.createElement("input");
     newQuestion.type = "text";
     newQuestion.placeholder = "Введите вопрос";
     newQuestion.className = "question";
-    questionsContainer.appendChild(newQuestion);
+
+    // Создание кнопки удаления
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Удалить";
+    deleteButton.className = "delete-question";
+
+    // Обработчик удаления конкретного вопроса
+    deleteButton.addEventListener("click", () => {
+        questionsContainer.removeChild(questionWrapper);
+    });
+
+    // Добавление элементов в обертку
+    questionWrapper.appendChild(newQuestion);
+    questionWrapper.appendChild(deleteButton);
+
+    // Добавление обертки в контейнер
+    questionsContainer.appendChild(questionWrapper);
+});
+
+// Очистка всех полей кроме первого, а первого — очищение
+document.getElementById("clearQuestions")?.addEventListener("click", () => {
+    const questionsContainer = document.querySelector(".questions-container");
+    const allWrappers = questionsContainer.querySelectorAll(".question-wrapper");
+
+    if (allWrappers.length > 0) {
+        // Оставляем первый элемент и очищаем его
+        const firstWrapper = allWrappers[0];
+        const firstInput = firstWrapper.querySelector(".question");
+        firstInput.value = "";
+
+        // Удаляем остальные
+        allWrappers.forEach((wrapper, index) => {
+            if (index > 0) {
+                questionsContainer.removeChild(wrapper);
+            }
+        });
+    }
 });
 
 // Сохранение опроса
