@@ -28,11 +28,11 @@ document.getElementById("login-form")?.addEventListener("submit", async (event) 
 
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        alert("Logged in successfully!");
+        //alert("Logged in successfully!");
         window.location.href = "./dashboard.html";
     } catch (error) {
         console.error("Login error:", error);
-        alert(`Error: ${error.message}`);
+        //alert(`Error: ${error.message}`);
     }
 });
 
@@ -54,12 +54,12 @@ document.getElementById("register-form")?.addEventListener("submit", async (even
             nickname: nickname,
             registeredAt: new Date().toISOString(),
         });
-        alert("Registration successful! You can now log in.");
+        //alert("Registration successful! You can now log in.");
 
         window.location.href = "./index.html";
     } catch (error) {
         console.error("Registration error:", error);
-        alert(`Error: ${error.message}`);
+        //alert(`Error: ${error.message}`);
     }
 });
 

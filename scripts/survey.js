@@ -47,12 +47,12 @@ async function loadSurvey(userId, surveyId) {
                 console.log("Submitting survey...");
                 try {
                     await submitSurvey(userId, surveyId);
-                    alert("Ответы успешно сохранены!");
+                    //alert("Ответы успешно сохранены!");
                     window.location.href = "./dashboard.html";
                     console.log("Survey submitted successfully");
                 } catch (error) {
                     console.error("Ошибка при сохранении ответов:", error);
-                    alert("Не удалось сохранить ответы.");
+                    //alert("Не удалось сохранить ответы.");
                 }
             });           
             surveyContainer.appendChild(submitButton);
@@ -72,7 +72,7 @@ async function loadSurvey(userId, surveyId) {
 async function submitSurvey(userId, surveyId) {
     const currentUser = getCurrentUser();
     if (!currentUser) {
-        alert("Вы должны быть авторизованы для участия в опросе.");
+        //alert("Вы должны быть авторизованы для участия в опросе.");
         return;
     }
 
@@ -96,10 +96,10 @@ async function submitSurvey(userId, surveyId) {
         const surveyResponsesRef = ref(database, `surveys/${userId}/${surveyId}/responses/${currentUser.uid}`);
         await update(surveyResponsesRef, responseData);
 
-        alert("Ответы успешно сохранены!");
+        //alert("Ответы успешно сохранены!");
     } catch (error) {
         console.error("Ошибка при сохранении ответов:", error);
-        alert("Не удалось сохранить ответы.");
+        //alert("Не удалось сохранить ответы.");
     }
 }
 

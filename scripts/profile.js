@@ -145,10 +145,10 @@ async function deleteSurvey(userId, surveyId) {
         const surveyRef = ref(database, `surveys/${userId}/${surveyId}`);
         await remove(surveyRef);
         console.log(`Опрос с ID ${surveyId} удален.`);
-        alert("Опрос успешно удален.");
+        //alert("Опрос успешно удален.");
     } catch (error) {
         console.error("Ошибка при удалении опроса:", error);
-        alert("Не удалось удалить опрос.");
+        //alert("Не удалось удалить опрос.");
     }
 }
 

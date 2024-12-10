@@ -60,14 +60,14 @@ document.getElementById("clearQuestions")?.addEventListener("click", (event) => 
 
 // Сохранение опроса
 document.getElementById("submit")?.addEventListener("click", async () => {
-    alert("Нажал на кнопку");
+    //alert("Нажал на кнопку");
     const title = document.getElementById("title").value;
     const questionInputs = document.querySelectorAll(".questions-container .question");
     const questions = Array.from(questionInputs).map((input) => input.value);
 
     const currentUser = getCurrentUser();
     if (!currentUser) {
-        alert("Вы должны быть авторизованы для создания опроса.");
+        //alert("Вы должны быть авторизованы для создания опроса.");
         return;
     }
 
@@ -82,9 +82,9 @@ document.getElementById("submit")?.addEventListener("click", async () => {
         const surveysRef = ref(database, `surveys/${currentUser.uid}`);
         const newSurveyRef = push(surveysRef);
         await set(newSurveyRef, surveyData);
-        alert("Опрос успешно создан!");
+        //alert("Опрос успешно создан!");
     } catch (error) {
         console.error("Ошибка при создании опроса:", error);
-        alert("Не удалось сохранить опрос.");
+        //alert("Не удалось сохранить опрос.");
     }
 });
