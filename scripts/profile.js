@@ -2,6 +2,17 @@ import { database } from "./firebaseConfig.js";
 import { ref, get, remove } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 import { getCurrentUser } from "./auth.js";
 
+
+const spinner = document.getElementById("loading-spinner");
+
+function showSpinner() {
+spinner.style.display = "flex";
+}
+
+function hideSpinner() {
+    spinner.style.display = "none";
+}
+
 async function waitForUser() {
     return new Promise((resolve) => {
         const interval = setInterval(() => {
@@ -16,6 +27,7 @@ async function waitForUser() {
 }
 
 async function loadProfile() {
+    showSpinner();
     const currentUser = await waitForUser();
 
     if (!currentUser || !currentUser.uid) {
@@ -137,6 +149,9 @@ async function loadProfile() {
         }
     } catch (error) {
         console.error("Ошибка при загрузке профиля:", error);
+    }
+    finally{
+        hideSpinner();
     }
 }
 

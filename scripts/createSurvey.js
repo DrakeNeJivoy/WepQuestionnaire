@@ -3,6 +3,16 @@ import { database, auth } from "./firebaseConfig.js";
 import { ref, push, set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 import { getCurrentUser } from "./auth.js";
 
+const spinner = document.getElementById("loading-spinner");
+
+function showSpinner() {
+spinner.style.display = "flex";
+}
+
+function hideSpinner() {
+    spinner.style.display = "none";
+}
+
 // Добавление новой строки для вопроса
 document.getElementById("addQuestion")?.addEventListener("click", (event) => {
     event.preventDefault();
@@ -61,6 +71,7 @@ document.getElementById("clearQuestions")?.addEventListener("click", (event) => 
 // Сохранение опроса
 document.getElementById("submit")?.addEventListener("click", async () => {
     //alert("Нажал на кнопку");
+    showSpinner();
     const title = document.getElementById("title").value;
     const questionInputs = document.querySelectorAll(".questions-container .question");
     const questions = Array.from(questionInputs).map((input) => input.value);
@@ -104,4 +115,6 @@ document.getElementById("submit")?.addEventListener("click", async () => {
             }
         });
     }
+    document.getElementById("title").value = "";
+    hideSpinner();
 });
