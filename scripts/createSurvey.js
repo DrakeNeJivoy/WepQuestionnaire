@@ -87,4 +87,21 @@ document.getElementById("submit")?.addEventListener("click", async () => {
         console.error("Ошибка при создании опроса:", error);
         //alert("Не удалось сохранить опрос.");
     }
+
+    const questionsContainer = document.querySelector(".questions-container");
+    const allWrappers = questionsContainer.querySelectorAll(".question-wrapper");
+
+    if (allWrappers.length > 0) {
+        // Оставляем первый элемент и очищаем его
+        const firstWrapper = allWrappers[0];
+        const firstInput = firstWrapper.querySelector(".question");
+        firstInput.value = "";
+
+        // Удаляем остальные
+        allWrappers.forEach((wrapper, index) => {
+            if (index > 0) {
+                questionsContainer.removeChild(wrapper);
+            }
+        });
+    }
 });
