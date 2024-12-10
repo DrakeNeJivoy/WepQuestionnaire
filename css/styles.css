@@ -184,6 +184,7 @@ button:hover {
 }
 
 /* Create Survey Page Styles */
+/* Create Survey Page Styles */
 #create-survey-page {
     max-width: 600px;
     margin: 0 auto;
@@ -192,6 +193,7 @@ button:hover {
 #create-survey-page form {
     display: flex;
     flex-direction: column;
+    gap: 15px; /* Расстояние между элементами */
 }
 
 #create-survey-page label {
@@ -204,23 +206,93 @@ button:hover {
     margin-top: 1rem;
 }
 
+/* Поля ввода */
 #create-survey-page input, 
 #create-survey-page textarea {
     padding: 0.5rem;
     border: 2px solid #ddd;
     border-radius: 4px;
     margin-bottom: 0.5rem;
-    width: 100%;
     box-sizing: border-box;
+    width: 100%; /* Поле ввода занимает всю доступную ширину */
 }
 
+/* Контейнер для вопросов */
 .questions-container {
     margin-bottom: 0.3rem;
 }
 
-#add-question {
-    margin-bottom: 1rem;
+/* Для каждого вопроса */
+.question-wrapper {
+    display: flex;
+    gap: 10px; /* Расстояние между полем ввода и кнопкой */
+    margin-bottom: 0.5rem;
 }
+
+.question-wrapper .question {
+    flex-grow: 1; /* Поле ввода будет занимать всю доступную ширину */
+}
+
+/* Кнопка "Удалить" */
+.question-wrapper .delete-question {
+    background-color: #f44336; /* Красный цвет для кнопки удаления */
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Увеличим внутренние отступы */
+    cursor: pointer;
+    font-size: 15px; /* Увеличим размер шрифта */
+    position: relative;
+    top: -10px; /* Поднимем кнопку выше */
+    border-radius: 5px; /* Скруглим углы для улучшения внешнего вида */
+    width: auto; /* Размер кнопки будет зависеть от текста */
+    height: auto; /* Кнопка подстроится под размер текста */
+    box-sizing: content-box; /* Убедимся, что padding не влияет на общий размер */
+}
+
+
+
+.question-wrapper .delete-question:hover {
+    background-color: #d32f2f;
+}
+
+/* Контейнер для кнопок */
+.buttons-container {
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+    align-items: center; /* Выравнивание кнопок по вертикали */
+    margin-top: 1rem;
+}
+
+.buttons-container button {
+    padding: 10px 65px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 4px;
+}
+
+#addQuestion {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+#clearQuestions {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+#submit {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+#addQuestion:hover, #clearQuestions:hover, #submit:hover {
+    background-color: #45a049;
+}
+
 
 /* Footer Styles */
 footer {
@@ -297,15 +369,20 @@ a:hover {
   .statistics-container {
     display: flex;
     flex-direction: column;
+    align-items: center; /* Горизонтальное центрирование */
+    justify-content: center; /* Вертикальное центрирование */
+    text-align: center;
 }
 
 .statistics-container .question-block {
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
 }
 
 .statistics-container .stats-row {
     display: flex;
     align-items: center;
+    justify-content: center; /* Центрирование диаграммы и ответа */
+    margin: 1rem 0; /* Отступы между строками */
 }
 
 .statistics-container canvas {
@@ -316,6 +393,16 @@ a:hover {
 .statistics-container .answers-block {
     margin-left: 20px;
 }
+
+.centered-title {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+}
+
 
 
 
@@ -358,3 +445,5 @@ a:hover {
 .section-header h2::after {
     content: " ▼";
 } */
+
+

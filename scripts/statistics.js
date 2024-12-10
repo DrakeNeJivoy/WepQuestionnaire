@@ -137,7 +137,7 @@ function displayStatistics(questions, stats, container) {
 
         // Создаем блок для ответов
         const answersBlock = document.createElement("div");
-        answersBlock.style.marginLeft = '20px';  // Отступ между диаграммой и текстом с ответами
+        answersBlock.style.marginLeft = '40px';  // Отступ между диаграммой и текстом с ответами
         Object.entries(answers).forEach(([answer, percentage]) => {
             const answerLine = document.createElement("p");
             answerLine.textContent = `Ответ ${answer}: ${percentage}%`;

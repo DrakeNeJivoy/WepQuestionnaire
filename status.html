@@ -8,14 +8,26 @@
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <h1>Статистика опроса</h1>
+    <header>
+        <nav>
+            <div class="logo">Анкетирование</div>
+            <ul class="nav-links">
+                <li><a href="./profile.html?userId=<%= currentUser.uid %>" id="profile-link">Профиль</a></li>
+                <li><a href="./create-survey.html">Создать опрос</a></li>
+                <li><a href="./dashboard.html">Панель</a></li>
+                <li><a href="./index.html">Выйти</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <h1 class="centered-title">Статистика опроса</h1> <!-- Добавлен класс -->
     <div id="loading-spinner" class="spinner" style="display: none;">
         <span class="loader"></span>
     </div>
+
     <div class="statistics-container">
-            
     </div>
-      
+ <footer class="footer">Ису-23-1 &copy; 2024</footer>
     <script type="module" src="scripts/statistics.js"></script>
 </body>
 </html>
