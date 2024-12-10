@@ -4,7 +4,8 @@ import { ref, push, set } from "https://www.gstatic.com/firebasejs/11.0.2/fireba
 import { getCurrentUser } from "./auth.js";
 
 // Добавление новой строки для вопроса
-document.getElementById("addQuestion")?.addEventListener("click", () => {
+document.getElementById("addQuestion")?.addEventListener("click", (event) => {
+    event.preventDefault();
     const questionsContainer = document.querySelector(".questions-container");
 
     // Создание обертки для нового вопроса
@@ -24,6 +25,7 @@ document.getElementById("addQuestion")?.addEventListener("click", () => {
 
     // Обработчик удаления конкретного вопроса
     deleteButton.addEventListener("click", () => {
+        event.preventDefault();
         questionsContainer.removeChild(questionWrapper);
     });
 
@@ -36,7 +38,8 @@ document.getElementById("addQuestion")?.addEventListener("click", () => {
 });
 
 // Очистка всех полей кроме первого, а первого — очищение
-document.getElementById("clearQuestions")?.addEventListener("click", () => {
+document.getElementById("clearQuestions")?.addEventListener("click", (event) => {
+    event.preventDefault();
     const questionsContainer = document.querySelector(".questions-container");
     const allWrappers = questionsContainer.querySelectorAll(".question-wrapper");
 

@@ -267,7 +267,7 @@ a:hover {
     height: 48px;
     border-radius: 50%;
     display: inline-block;
-    border-top: 4px solid #888;
+    border-top: 4px solid #007BFF;
     border-right: 4px solid transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
@@ -281,7 +281,7 @@ a:hover {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border-left: 4px solid #444;
+    border-left: 4px solid #777;
     border-bottom: 4px solid transparent;
     animation: rotation 0.5s linear infinite reverse;
   }
