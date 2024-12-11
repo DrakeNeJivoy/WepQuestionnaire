@@ -443,7 +443,7 @@ a:hover {
     background-color: #0056b3;
 }
 
-h1 {
+#surveyTitle {
     text-align: center;
     margin: 10px 0;
     font-size: 32px;
