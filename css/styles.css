@@ -193,7 +193,7 @@ button:hover {
 #create-survey-page form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
 }
 
 #create-survey-page label {
@@ -220,6 +220,7 @@ button:hover {
 /* Контейнер для вопросов */
 .questions-container {
     margin-bottom: 0.3rem;
+    margin-left: 20px;
 }
 
 /* Для каждого вопроса */
@@ -440,4 +441,45 @@ a:hover {
 #created-surveys-list li button:hover, 
 #completed-surveys-list li button:hover {
     background-color: #0056b3;
+}
+
+h1 {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 32px;
+    color: #000000;
+    margin-right: 1010px;
+}
+
+h2 {
+    margin-bottom: 15px;
+    margin-right: 1100px;
+}
+#surveyForm {
+    max-width: 1500px;
+    margin: 0 auto;
+    background: white;
+    padding: 15px;
+}
+/* Стили для радио-кнопок */
+.questions-container input[type="radio"] {
+    margin-right: 10px; /* Отступ справа от радио-кнопки */
+    margin-top: 10px;    /* Отступ сверху */
+}
+
+/* Стили для меток, которые обвязывают радио-кнопки */
+.questions-container label {
+    margin-right: 15px; /* Отступ справа между радио-кнопками */
+    display: inline-block;
+    font-size: 14px;    /* Размер шрифта */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+/* Общие стили для блока с вопросами */
+.question-wrapper {
+    margin-bottom: 25px;  /* Отступ снизу для каждого вопроса */
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
