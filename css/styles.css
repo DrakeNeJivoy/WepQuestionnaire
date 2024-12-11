@@ -7,11 +7,9 @@
 
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: #f4f4f9;
-    margin: 0;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh
 }
 
 /* Header Styles */
@@ -57,6 +55,8 @@ nav .nav-links a:hover {
 /* Main Styles */
 main {
     padding: 2rem;
+    flex: 1; /* Основной контент занимает доступное пространство */
+    overflow-y: auto;
 }
 
 /* Auth Page Styles */
@@ -184,10 +184,10 @@ button:hover {
 }
 
 /* Create Survey Page Styles */
-/* Create Survey Page Styles */
 #create-survey-page {
     max-width: 600px;
     margin: 0 auto;
+    background: #fff;
 }
 
 #create-survey-page form {
@@ -300,10 +300,8 @@ footer {
     padding: 1rem;
     background: #333;
     color: #fff;
-    position: fixed; /* Закрепляем футер */
-    bottom: 0; /* Располагаем футер внизу */
-    width: 100%; /* Футер будет занимать всю ширину экрана */
-    left: 0; /* Убираем отступы слева */
+    width: 100%;
+    flex-shrink: 0;    
 }
 
 
@@ -403,47 +401,49 @@ a:hover {
     position: relative;
 }
 
-
-
-
-
-
-/* Добавим стили для раскрывающихся списков */
-/* #completed-surveys, #pending-surveys {
-    margin-top: 20px;
-}
-
-#completed-surveys-list, #pending-surveys-list {
+#created-surveys-list li, 
+#completed-surveys-list li {
+    display: flex;
+    flex-direction: column; /* Элементы в столбик */
+    align-items: flex-start; /* Выравниваем по левому краю */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
     list-style-type: none;
-    padding-left: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
 }
 
-#completed-surveys h2, #pending-surveys h2 {
+#created-surveys-list li span, 
+#completed-surveys-list li span {
+    margin-bottom: 10px; /* Отступ между текстом и кнопками */
+}
+
+#created-surveys-list li .buttons-container, 
+#completed-surveys-list li .buttons-container {
+    display: flex;
+    flex-direction: column; /* Располагаем кнопки вертикально */
+    gap: 10px; /* Добавляем отступ между кнопками */
+    width: 100%; /* Растягиваем контейнер по ширине */
+}
+
+#created-surveys-list li button, 
+#completed-surveys-list li button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: #fff;
     cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Кнопки растягиваются по ширине карточки */
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-#completed-surveys-list, #pending-surveys-list {
-    display: none;
+#created-surveys-list li button:hover, 
+#completed-surveys-list li button:hover {
+    background-color: #0056b3;
 }
-
-#completed-surveys.open, #pending-surveys.open {
-    display: block;
-}
-
-#completed-surveys h2::after, #pending-surveys h2::after {
-    content: ' ▼';
-}
-
-#completed-surveys.open h2::after, #pending-surveys.open h2::after {
-    content: ' ▲';
-}
-
-.section-header.open h2::after {
-    content: " ▲";
-}
-
-.section-header h2::after {
-    content: " ▼";
-} */
-
 
