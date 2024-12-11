@@ -9,7 +9,7 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh
+    min-height: 100vh;
 }
 
 /* Header Styles */
@@ -55,7 +55,7 @@ nav .nav-links a:hover {
 /* Main Styles */
 main {
     padding: 2rem;
-    flex: 1; /* Основной контент занимает доступное пространство */
+    flex: 1;
     overflow-y: auto;
 }
 
@@ -179,8 +179,8 @@ button:hover {
 /* Контейнер для кнопок в survey-card */
 .survey-card .buttons-container {
     display: flex;
-    justify-content: center; /* Центрирование кнопок */
-    flex-wrap: wrap; /* Перенос на новую строку при нехватке места */
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* Create Survey Page Styles */
@@ -193,7 +193,7 @@ button:hover {
 #create-survey-page form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Расстояние между элементами */
+    gap: 15px;
 }
 
 #create-survey-page label {
@@ -214,7 +214,7 @@ button:hover {
     border-radius: 4px;
     margin-bottom: 0.5rem;
     box-sizing: border-box;
-    width: 100%; /* Поле ввода занимает всю доступную ширину */
+    width: 100%;
 }
 
 /* Контейнер для вопросов */
@@ -225,31 +225,29 @@ button:hover {
 /* Для каждого вопроса */
 .question-wrapper {
     display: flex;
-    gap: 10px; /* Расстояние между полем ввода и кнопкой */
+    gap: 10px;
     margin-bottom: 0.5rem;
 }
 
 .question-wrapper .question {
-    flex-grow: 1; /* Поле ввода будет занимать всю доступную ширину */
+    flex-grow: 1;
 }
 
 /* Кнопка "Удалить" */
 .question-wrapper .delete-question {
-    background-color: #f44336; /* Красный цвет для кнопки удаления */
+    background-color: #f44336;
     color: white;
     border: none;
-    padding: 10px 20px; /* Увеличим внутренние отступы */
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 15px; /* Увеличим размер шрифта */
+    font-size: 15px;
     position: relative;
-    top: -10px; /* Поднимем кнопку выше */
-    border-radius: 5px; /* Скруглим углы для улучшения внешнего вида */
-    width: auto; /* Размер кнопки будет зависеть от текста */
-    height: auto; /* Кнопка подстроится под размер текста */
-    box-sizing: content-box; /* Убедимся, что padding не влияет на общий размер */
+    top: -10px;
+    border-radius: 5px;
+    width: auto;
+    height: auto;
+    box-sizing: content-box;
 }
-
-
 
 .question-wrapper .delete-question:hover {
     background-color: #d32f2f;
@@ -258,8 +256,8 @@ button:hover {
 /* Контейнер для кнопок */
 .buttons-container {
     display: flex;
-    gap: 10px; /* Расстояние между кнопками */
-    align-items: center; /* Выравнивание кнопок по вертикали */
+    gap: 10px;
+    align-items: center;
     margin-top: 1rem;
 }
 
@@ -293,7 +291,6 @@ button:hover {
     background-color: #45a049;
 }
 
-
 /* Footer Styles */
 footer {
     text-align: center;
@@ -301,9 +298,8 @@ footer {
     background: #333;
     color: #fff;
     width: 100%;
-    flex-shrink: 0;    
+    flex-shrink: 0;
 }
-
 
 /* Style for Links */
 a {
@@ -317,15 +313,13 @@ a:hover {
     color: #0056b3;
 }
 
-
-/*Анимация загрузки*/
+/* Анимация загрузки */
 .spinner {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* background: rgba(255, 255, 255, 0.8); Полупрозрачный фон */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -341,10 +335,10 @@ a:hover {
     border-right: 4px solid transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
-  }
-  .loader::after {
-    content: '';  
-    box-sizing: border-box;
+}
+
+.loader::after {
+    content: '';
     position: absolute;
     left: 0;
     top: 0;
@@ -354,21 +348,22 @@ a:hover {
     border-left: 4px solid #777;
     border-bottom: 4px solid transparent;
     animation: rotation 0.5s linear infinite reverse;
-  }
-  @keyframes rotation {
+}
+
+@keyframes rotation {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  } 
+}
 
-  .statistics-container {
+.statistics-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Горизонтальное центрирование */
-    justify-content: center; /* Вертикальное центрирование */
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 
@@ -379,8 +374,8 @@ a:hover {
 .statistics-container .stats-row {
     display: flex;
     align-items: center;
-    justify-content: center; /* Центрирование диаграммы и ответа */
-    margin: 1rem 0; /* Отступы между строками */
+    justify-content: center;
+    margin: 1rem 0;
 }
 
 .statistics-container canvas {
@@ -404,8 +399,8 @@ a:hover {
 #created-surveys-list li, 
 #completed-surveys-list li {
     display: flex;
-    flex-direction: column; /* Элементы в столбик */
-    align-items: flex-start; /* Выравниваем по левому краю */
+    flex-direction: column;
+    align-items: flex-start;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -417,15 +412,15 @@ a:hover {
 
 #created-surveys-list li span, 
 #completed-surveys-list li span {
-    margin-bottom: 10px; /* Отступ между текстом и кнопками */
+    margin-bottom: 10px;
 }
 
 #created-surveys-list li .buttons-container, 
 #completed-surveys-list li .buttons-container {
     display: flex;
-    flex-direction: column; /* Располагаем кнопки вертикально */
-    gap: 10px; /* Добавляем отступ между кнопками */
-    width: 100%; /* Растягиваем контейнер по ширине */
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
 }
 
 #created-surveys-list li button, 
@@ -437,7 +432,7 @@ a:hover {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 100%; /* Кнопки растягиваются по ширине карточки */
+    width: 100%;
     text-align: center;
     margin-bottom: 10px;
 }
@@ -446,4 +441,3 @@ a:hover {
 #completed-surveys-list li button:hover {
     background-color: #0056b3;
 }
-

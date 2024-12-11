@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="logo">Анкетирование</div>
+            <ul class="nav-links">
+                <li><a href="./profile.html?userId=<%= currentUser.uid %>" id="profile-link">Профиль</a></li>
+                <li><a href="./create-survey.html">Создать опрос</a></li>
+                <li><a href="./dashboard.html">Панель</a></li>
+                <li><a href="./index.html">Выйти</a></li>
+                
+            </ul>
+        </nav>
+    </header>
     <h1 id="surveyTitle">Название теста</h1>
     <form id="surveyForm">
         <div id="loading-spinner" class="spinner" style="display: none;">
@@ -15,6 +27,7 @@
         </div>        
         <div class="creator-info-container"></div>
         <div class="questions-container"></div>
+        <footer>Ису-23-1 &copy; 2024</footer>
     </form>
 </body>
 </html>
